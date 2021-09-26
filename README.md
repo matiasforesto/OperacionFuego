@@ -2,12 +2,14 @@
 
 Probamos los servicios utilizando Postman.
 
-Servicio 1 
-# 35.193.197.34/testMatias/OperacionFuego/topsecret/
+# Servicio 1 
+35.193.197.34/testMatias/OperacionFuego/topsecret/
 El método de ejecución es POST.
 
 Para ejecutar topsecret espera el formato de INPUT siguiente:
+
 ejemplo 1:
+
 {
     "satellites":{
                     "0": {"name":"Kenobi", "distance":"100.0", "message": {"0":"este", "1":"", "2":"", "3":"mensaje", "4":""}},
@@ -17,6 +19,7 @@ ejemplo 1:
 }
 
 ejemplo 2:
+
 {
   "satellites":{
                   "0": {"name":"Kenobi", "distance":"110.0", "message": {"0":"Ayuda", "1":"", "2":"", "3":"", "4":"reactor"}},
@@ -30,6 +33,6 @@ La OUTPUT devuelve el siguiente formato:
 {"position":{"x":-100,"y":75.5},"message":" este es un mensaje secreto"}
 
 
-Servicio 2
-# 35.193.197.34/testMatias/OperacionFuego/topsecret_split
-# 35.193.197.34/testMatias/OperacionFuego/topsecret_split/{satellite_name}
+# Servicio 2
+35.193.197.34/testMatias/OperacionFuego/topsecret_split
+35.193.197.34/testMatias/OperacionFuego/topsecret_split/{satellite_name}
