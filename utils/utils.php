@@ -2,19 +2,61 @@
 
 function GetLocation(float $dKe, float $dSk, float $dSa)
 {
-    //Posición de los satélites actualmente en servicio y su distancia respectiva al portacarga
-    $Kenobi = array("Kenobi", -500.00, -200.00, $dKe);
-    $Skywalker = array("Skywalker", 100.00, -100.00, $dSk);
-    $Sato = array("Sato", 500.00, 100.00, $dSa);
-    
-    //calculamos la circunferencia de cada satelite
-    $cKe= circunferencia($Kenobi[3]);
-    $cSk= circunferencia($Skywalker[3]);
-    $cSa= circunferencia($Sato[3]);
+  try{
+      //Posición de los satélites actualmente en servicio y su distancia respectiva al portacarga
+      $Kenobi = array("Kenobi", -500.00, -200.00, $dKe);
+      $Skywalker = array("Skywalker", 100.00, -100.00, $dSk);
+      $Sato = array("Sato", 500.00, 100.00, $dSa);
+      
+      //calculamos la circunferencia de cada satelite
+      $cKe= circunferencia($Kenobi[3]);
+      $cSk= circunferencia($Skywalker[3]);
+      $cSa= circunferencia($Sato[3]);
+      
+      //Triangular position del portacarga y devolver la misma buscando la interceccion de las 3 circunferencia
+      $position=array("position"=>array("x"=>-100.0, "y"=>75.5));
+      return $position;
+      
+  }catch (Exception $e) {
+        //print_r($e);
+      echo "No se pueda determinar la posición";
+      header("HTTP/1.1 400 Bad Request");
+  }
+}
 
-//Triangular position del portacarga y devolver la misma buscando la interceccion de las 3 circunferencia
-   $position=array("position"=>array("x"=>-100.0, "y"=>75.5));
-   return $position;
+function GetMessage(array $msgs)
+{
+  try{
+      //creamos array para rearmar el mesaje
+      $msgFull=array();
+      $message="";
+      
+      //rearmamos el mensaje
+      foreach($msgs as $msg) { 
+        foreach($msg as $clave => $valor) { 
+          //print_r($p);
+          if($valor!="")
+          {
+            $msgFull[$clave]=$valor;
+          }
+        }
+      }
+
+      //ordenamos el mensaje
+      ksort($msgFull);
+      //lo almacenamos en un string
+      foreach($msgFull as $p) { 
+        $message=$message." ".$p;
+      }
+    
+      //devolver el mensaje armado.
+      return $message;
+
+    }catch (Exception $e) {
+      //print_r($e);
+      echo "No se pueda determinar el mensaje";
+      header("HTTP/1.1 400 Bad Request");
+  }
 }
 
 //la distancia de cada satelite a la nave es el radio ($r) de cada circunferencia
@@ -29,35 +71,7 @@ function circunferencia($r)
   return  $c;
 }
 
-function GetMessage(array $msgs)
-{
-    //creamos array para rearmar el mesaje y string resultante
-    $msgFull=array();
-    $message="";
-    //rearmamos el mensaje
-    foreach($msgs as $msg) { 
-      foreach($msg as $clave => $valor) { 
-        //print_r($p);
-        if($valor!="")
-        {
-          $msgFull[$clave]=$valor;
-        }
-      }
-    }
-    //ordenamos el mensaje
-    ksort($msgFull);
-
-    foreach($msgFull as $p) { 
-      $message=$message." ".$p;
-    }
-    
-    //devolver el mensaje armado.
-    //print_r($message);
-    return $message;
-}
-
-
-
+//vaalidacion de JSON
 function json_validate($string)
 {
   // decode the JSON data

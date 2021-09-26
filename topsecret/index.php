@@ -1,26 +1,21 @@
 <?php
 //http://35.193.197.34/testMatias/OperacionFuego/topsecret/
-ini_set('display_errors','1');
-
+//ini_set('display_errors','1');
 include "../utils/utils.php";
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   
   if (isset($_POST['satellites'])){
 
-    $satellites = $_POST['satellites'];
+    $satellites = $_POST['satellites']; //viene por el POST de topsecret
+    
     //validamos que este bien armado el JSON
     $satellites = json_validate($satellites);
     if ( !is_object($satellites) ) {
       $satellites = array('error'=>$satellites); 
     }
-    else
-    {
-      //array de satellites
-      //$satellites =  (array) $satellites;
-    }
-    
-    
+  
     $Kenobi="";
     $dKe=0.0;
     
@@ -66,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             break;
             
             default:
-               print($s->name." no es un satelite en linea");
+               print($s->name." No es un satelite en linea");
                header("HTTP/1.1 404 Bad Request");
                exit();
             break;
@@ -75,13 +70,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       }//fin foreach satellite
   }//fin foreach satellites
     
+  if($Kenobi=="" || $Skywalker=="" || $Sato=="")
+  {
+    print("Algunos satelites no estan en linea, disponibles: {$Kenobi} - {$Skywalker} - {$Sato}");
+    header("HTTP/1.1 404 Bad Request");
+    exit();
+  }
   /*GetLocation pasar las disntancias de los 3 satelites hasta la nave portacarga 
     INPUT GetLocation(dKe, dSk, dSa) 
     OUTPUT [-500, -200] location satelite*/
     $position = GetLocation($dKe, $dSk, $dSa);
-    
     //GetMessage pasar el array de mensajes captados por los 3 satelites
     $message = GetMessage($messages);
+    
     //armamos el array final de salida pasando el mensaje
     $position["message"]=$message;
     
@@ -90,16 +91,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     print_r(json_encode($position));
     
   }else{
-      //En caso de que ninguna de las opciones anteriores se haya ejecutado
       echo "No viene en el POST el JSON de satellites";
       header("HTTP/1.1 400 Bad Request");
   }
-
+  
   exit();
 }
 
-
 //En caso de que ninguna de las opciones anteriores se haya ejecutado
-echo "los metodos request disponibles son: GET ";
+echo "Metodos request disponible : POST ";
 header("HTTP/1.1 400 Bad Request");
+exit();
 ?>
