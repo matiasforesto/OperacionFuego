@@ -12,12 +12,25 @@ Para ejecutar topsecret espera el parametro "satellites" Con el siguiente JSON I
 EJEMPLO 1:
 
 {
-    "satellites":{
-                    "0": {"name":"Kenobi", "distance":"100.0", "message": {"0":"este", "1":"", "2":"", "3":"mensaje", "4":""}},
-                    "1": {"name":"Skywalker", "distance":"115.5", "message": {"0":"", "1":"es", "2":"", "3":"", "4":"secreto"}},
-                    "2": {"name":"Sato", "distance":"142.7", "message": {"0":"este", "1":"es", "2":"un", "3":"", "4":"secreto"}}
-                 }
+    "satellites": [
+        {
+            "name": "Kenobi",
+            "distance": 100.0,
+            "message": ["este","","","mensaje",""]
+        },
+        {
+            "name": "Skywalker",
+            "distance": 115.5,
+            "message": ["","es","","","secreto"]
+        },
+        {
+            "name": "Sato",
+            "distance": 142.7,
+            "message": ["este","","un","",""]
+        }
+    ]
 }
+
 
 OUTPUT devuelve el siguiente formato:
 
@@ -26,28 +39,48 @@ OUTPUT devuelve el siguiente formato:
 EJEMPLO 2:
 
 {
-  "satellites":{
-                  "0": {"name":"Kenobi", "distance":"110.0", "message": {"0":"Ayuda", "1":"", "2":"", "3":"", "4":"reactor", "5":""}},
-                  "1": {"name":"Skywalker", "distance":"135.5", "message": {"0":"", "1":"se", "2":"", "3":"el", "4":"", "5":"principal"}},
-                  "2": {"name":"Sato", "distance":"152.7", "message": {"0":"Ayuda", "1":"", "2":"averio", "3":"", "4":"", "5":""}}
-               }
+    "satellites": [
+        {
+            "name": "Kenobi",
+            "distance": 100.0,
+            "message": ["Ayuda","","","","reactor",""]
+        },
+        {
+            "name": "Skywalker",
+            "distance": 115.5,
+            "message": ["","se","","el","","principal"]
+        },
+        {
+            "name": "Sato",
+            "distance": 142.7,
+            "message": ["","","rompio","","","principal"]
+        }
+    ]
 }
 
 OUTPUT devuelve el siguiente formato:
 
-{"position":{"x":-100,"y":75.5},"message":" Ayuda se averio el reactor principal"}
+{"position":{"x":-100,"y":75.5},"message":" Ayuda se rompio el reactor principal"}
 
 EJEMPLO 3: 
 
 {
-  "satellites":{
-                  "0": {"name":"Kenobi", "distance":"110.0", "message": {"0":"", "1":"", "2":"", "3":"", "4":"reactor", "5":""}},
-                  "1": {"name":"Skywalker", "distance":"135.5", "message": {"0":"", "1":"se", "2":"", "3":"el", "4":"", "5":"principal"}}
-               }
+    "satellites": [
+        {
+            "name": "Kenobi",
+            "distance": 100.0,
+            "message": ["Ayuda","","","","reactor",""]
+        },
+        {
+            "name": "Sato",
+            "distance": 142.7,
+            "message": ["","","rompio","","","principal"]
+        }
+    ]
 }
 
 OUTPUT devuelve el siguiente mensaje:
-Algunos satelites no estan en linea, disponibles: Kenobi - Skywalker
+Algunos satelites no estan en linea, disponibles: Kenobi - - Sato
 
 
 # Servicio 2
@@ -59,26 +92,84 @@ El método de ejecución es POST O GET. pasando un json por cada satelite
 
 Para ejecutar topsecret espera los parametros "Kenobi", "Skywalker" y "Sato" con el siguiente JSON INPUT:
 
-Mediante POST
+
+# Mediante POST
+
 
 EJEMPLO 1:
-{"Kenobi": {"distance":"110.0", "message": {"0":"Ayuda", "1":"", "2":"", "3":"", "4":"reactor", "5":""}}}
-{"Skywalker": {"distance":"135.5", "message": {"0":"", "1":"se", "2":"", "3":"el", "4":"", "5":"principal"}}}
-{"Sato": {"distance":"152.7", "message": {"0":"Ayuda", "1":"", "2":"averio", "3":"", "4":"", "5":""}}}
+
+{
+    "Kenobi": {
+        "distance": 110.0,
+        "message": ["Ayuda","","","","reactor",""]
+    }
+}
+
+{
+    "Skywalker": {
+        "distance": 135.5,
+        "message": ["","se","","el","","principal"]
+    }
+}
+
+{
+    "Sato": {
+        "distance": 110.0,
+        "message": ["","","rompio","","",""]
+    }
+}
 
 OUTPUT devuelve el siguiente formato:
 
-{"position":{"x":-100,"y":75.5},"message":" Ayuda se averio el reactor principal"}
+{"position":{"x":-100,"y":75.5},"message":" Ayuda se rompio el reactor principal"}
 
 
-Mediante GET
+# Mediante GET
 
 35.193.197.34/testMatias/OperacionFuego/topsecret_split/{satellite_name}
 
 EJEMPLO 1:
 
-35.193.197.34/testMatias/OperacionFuego/topsecret_split/?Kenobi={"Kenobi": {"distance":"110.0", "message": {"0":"Ayuda", "1":"", "2":"", "3":"", "4":"reactor", "5":""}}}&Skywalker={"Skywalker": {"distance":"135.5", "message": {"0":"", "1":"se", "2":"", "3":"el", "4":"", "5":"principal"}}}&Sato={"Sato": {"distance":"152.7", "message": {"0":"Ayuda", "1":"", "2":"averio", "3":"", "4":"", "5":""}}}
+http://35.193.197.34/testMatias/OperacionFuego/topsecret_split/?Kenobi={
+    "Kenobi": {
+        "distance": 110.0,
+        "message": ["Ayuda","","","","reactor",""]
+    }
+}&Sato={
+    "Skywalker": {
+        "distance": 135.5,
+        "message": ["","se","","el","","principal"]
+    }
+}&Skywalker={
+    "Sato": {
+        "distance": 110.0,
+        "message": ["","","rompio","","",""]
+    }
+}
 
 OUTPUT devuelve el siguiente formato:
 
-{"position":{"x":-100,"y":75.5},"message":" Ayuda se averio el reactor principal"}
+{"position":{"x":-100,"y":75.5},"message":" Ayuda se rompio el reactor principal"}
+
+EJEMPLO 2:
+
+http://35.193.197.34/testMatias/OperacionFuego/topsecret_split/?Kenobi={
+    "Kenobi": {
+        "distance": 110.0,
+        "message": ["Ayuda","","","","reactor",""]
+    }
+}&Sato={
+    "Skywalker": {
+        "distance": 135.5,
+        "message": ["","se","","el","","principal"]
+    }
+}&Skywalker={
+    "Sato": {
+        "distance": 110.0,
+        "message": ["","","rompio","","",""]
+    }
+}
+
+OUTPUT devuelve el siguiente formato:
+
+Algunos satelites no estan en linea, disponibles: Kenobi - - Sato
