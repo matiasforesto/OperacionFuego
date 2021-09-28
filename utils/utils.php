@@ -197,9 +197,9 @@ function GetLocation(float $dKe, float $dSk, float $dSa){
       array_push($datos_satelites, $Skywalker);
       array_push($datos_satelites, $Sato);
       //Triangular position del portacarga y devolver la misma
-      //$position = trilateracion($datos_satelites);
+      $position = trilateracion($datos_satelites);
     
-      $position=array("position"=>array("x"=>-100.0, "y"=>75.5));
+      //$position=array("position"=>array("x"=>-100.0, "y"=>75.5));
       return $position;
       
   }catch (Exception $e) {
@@ -385,7 +385,7 @@ function trilateracion(array $datos_satelites)
       $lon = rad2deg(atan2($triPt_y,$triPt_x));
 
       $position=array("position"=>array("x"=>$lat, "y"=>$lon));
-      print_r($position);
+      //print_r($position);
 
       return $position;
 }

@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors','1');
-//http://35.193.197.34/testMatias/OperacionFuego/topsecret_split/
+//http://34.136.51.66/OperacionFuego/topsecret_split/
 include "../utils/utils.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET'){ //ESPERA POST o GET
