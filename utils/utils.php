@@ -166,7 +166,7 @@ function topSecretSplit($satellites)
 
   if(!is_numeric($dKe) || !is_numeric($dSk) || !is_numeric($dSa))
   {
-      print("Alguna de las distancias no esta bien cargada : {$nameKe}:{$dKe} - {$nameSk}:{$dSk} - {$nameSa}:{$dSa}");
+      print("Algunas de las distancias no estan bien cargada : {$nameKe}:{$dKe} - {$nameSk}:{$dSk} - {$nameSa}:{$dSa}");
       header("HTTP/1.1 404 Bad Request");
       exit();
   }
