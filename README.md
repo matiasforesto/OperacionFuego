@@ -3,7 +3,7 @@
 Probamos los servicios utilizando Postman.
 
 # Servicio 1 
-34.136.51.66/testMatias/OperacionFuego/topsecret/
+http://34.136.51.66/OperacionFuego/topsecret/
 
 El método de ejecución es POST.
 
@@ -42,17 +42,17 @@ EJEMPLO 2:
     "satellites": [
         {
             "name": "Kenobi",
-            "distance": 100.0,
+            "distance": 110.0,
             "message": ["Ayuda","","","","reactor",""]
         },
         {
             "name": "Skywalker",
-            "distance": 115.5,
+            "distance": 120.5,
             "message": ["","se","","el","","principal"]
         },
         {
             "name": "Sato",
-            "distance": 142.7,
+            "distance": 150.7,
             "message": ["","","rompio","","","principal"]
         }
     ]
@@ -60,7 +60,7 @@ EJEMPLO 2:
 
 OUTPUT devuelve el siguiente formato:
 
-{"position":{"x":-8.024676043673253,"y":69.50272447014213},"message":" Ayuda se rompio el reactor principal"}
+{"position":{"x":-8.12176599007428,"y":70.69320124857136},"message":" Ayuda se rompio el reactor principal"}
 
 EJEMPLO 3: 
 
@@ -68,12 +68,12 @@ EJEMPLO 3:
     "satellites": [
         {
             "name": "Kenobi",
-            "distance": 100.0,
+            "distance": 200.0,
             "message": ["Ayuda","","","","reactor",""]
         },
         {
             "name": "Sato",
-            "distance": 142.7,
+            "distance": 133.7,
             "message": ["","","rompio","","","principal"]
         }
     ]
@@ -84,7 +84,7 @@ Algunos satelites no estan en linea, disponibles: Kenobi | | Sato
 
 
 # Servicio 2
-35.193.197.34/testMatias/OperacionFuego/topsecret_split/
+http://34.136.51.66/OperacionFuego/topsecret_split/
 
 El método de ejecución es POST O GET. pasando un json por cada satelite
 
@@ -92,10 +92,7 @@ El método de ejecución es POST O GET. pasando un json por cada satelite
 
 Para ejecutar topsecret espera los parametros "Kenobi", "Skywalker" y "Sato" con el siguiente JSON INPUT:
 
-
 # Mediante POST
-
-espera 3 parametros llamados Kenobi, Skywalker y Sato
 
 EJEMPLO 1:
 
@@ -127,7 +124,7 @@ OUTPUT devuelve el siguiente formato:
 
 # Mediante GET
 
-35.193.197.34/testMatias/OperacionFuego/topsecret_split/{satellite_name}
+http://34.136.51.66/OperacionFuego/topsecret_split/{satellite_name}
 
 EJEMPLO 1:
 
