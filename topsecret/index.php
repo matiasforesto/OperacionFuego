@@ -1,19 +1,17 @@
 <?php
 //http://34.136.51.66/OperacionFuego/topsecret/
 //ini_set('display_errors','1');
-include "../utils/utils.php";
-
+//require_once "../utils/utils.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   
-  //print_r( $_POST);
-  //exit();
   if (isset($_POST['satellites'])){
 
+    require_once "../models/topSecret.php";
     $satellites = $_POST['satellites']; //viene por el POST de topsecret
     
-    //ejecutamos topSecret para recuperar la posicion y el mensaje
-    $position = topSecret($satellites);
+    $topSecret = new topSecret();
+    $position = $topSecret->topSecretIn($satellites);
   
     //respuesta
     header("HTTP/1.1 200 OK");

@@ -1,10 +1,12 @@
 <?php
-ini_set('display_errors','1');
 //http://34.136.51.66/OperacionFuego/topsecret_split/
-include "../utils/utils.php";
+
+ini_set('display_errors','1');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET'){ //ESPERA POST o GET
 
+    require_once "../models/topSecretSplit.php";
+    
     $satellites=array();
 
     if(isset($_REQUEST['Kenobi'])){
@@ -30,7 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
     }
 
     //ejecutamos topSecret para recuperar la posicion y el mensaje
-    $position = topSecretSplit($satellites); 
+    $topSecretSplit = new topSecretSplit();
+    $position = $topSecretSplit->topSecretSplitIn($satellites);
+    
     //respuesta
     header("HTTP/1.1 200 OK");
     print_r(json_encode($position));
