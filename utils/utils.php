@@ -394,7 +394,6 @@ function trilateracion(array $positions)
       $lon = rad2deg(atan2($triPt_y,$triPt_x));
 
       $position=array("position"=>array("x"=>$lat, "y"=>$lon));
-      //print_r($position);
 
       return $position;
 }
