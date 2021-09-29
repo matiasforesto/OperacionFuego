@@ -3,7 +3,7 @@
 Probamos los servicios utilizando Postman.
 
 # Servicio 1 
-35.193.197.34/testMatias/OperacionFuego/topsecret/
+34.136.51.66/testMatias/OperacionFuego/topsecret/
 
 El método de ejecución es POST.
 
@@ -34,7 +34,7 @@ EJEMPLO 1:
 
 OUTPUT devuelve el siguiente formato:
 
-{"position":{"x":-100,"y":75.5},"message":" este es un mensaje secreto"}
+{"position":{"x":-8.024676043673253,"y":69.50272447014213},"message":" este es un mensaje secreto"}
 
 EJEMPLO 2:
 
@@ -60,7 +60,7 @@ EJEMPLO 2:
 
 OUTPUT devuelve el siguiente formato:
 
-{"position":{"x":-100,"y":75.5},"message":" Ayuda se rompio el reactor principal"}
+{"position":{"x":-8.024676043673253,"y":69.50272447014213},"message":" Ayuda se rompio el reactor principal"}
 
 EJEMPLO 3: 
 
@@ -80,7 +80,7 @@ EJEMPLO 3:
 }
 
 OUTPUT devuelve el siguiente mensaje:
-Algunos satelites no estan en linea, disponibles: Kenobi - - Sato
+Algunos satelites no estan en linea, disponibles: Kenobi | | Sato
 
 
 # Servicio 2
@@ -95,33 +95,34 @@ Para ejecutar topsecret espera los parametros "Kenobi", "Skywalker" y "Sato" con
 
 # Mediante POST
 
+espera 3 parametros llamados Kenobi, Skywalker y Sato
 
 EJEMPLO 1:
 
 {
     "Kenobi": {
-        "distance": 110.0,
-        "message": ["Ayuda","","","","reactor",""]
+        "distance": 112.0,
+        "message": ["Fuimos","","","dos","",""]
     }
 }
 
 {
     "Skywalker": {
-        "distance": 135.5,
-        "message": ["","se","","el","","principal"]
+        "distance": 143.5,
+        "message": ["","atacados","","","","desconocidas"]
     }
 }
 
 {
     "Sato": {
-        "distance": 110.0,
-        "message": ["","","rompio","","",""]
+        "distance": 150.0,
+        "message": ["","","por","","naves",""]
     }
 }
 
 OUTPUT devuelve el siguiente formato:
 
-{"position":{"x":-100,"y":75.5},"message":" Ayuda se rompio el reactor principal"}
+{"position":{"x":-2.1889474519972314,"y":81.69987302953473},"message":" Fuimos atacados por dos naves desconocidas"}
 
 
 # Mediante GET
@@ -130,46 +131,41 @@ OUTPUT devuelve el siguiente formato:
 
 EJEMPLO 1:
 
-http://35.193.197.34/testMatias/OperacionFuego/topsecret_split/?Kenobi={
+http://34.136.51.66/OperacionFuego/topsecret_split/?Kenobi={
     "Kenobi": {
-        "distance": 110.0,
-        "message": ["Ayuda","","","","reactor",""]
-    }
-}&Sato={
-    "Skywalker": {
-        "distance": 135.5,
-        "message": ["","se","","el","","principal"]
+        "distance": 118.0,
+        "message": ["Fuimos","","","dos","",""]
     }
 }&Skywalker={
+    "Skywalker": {
+        "distance": 149.5,
+        "message": ["","atacados","","","","desconocidas"]
+    }
+}&Sato={
     "Sato": {
-        "distance": 110.0,
-        "message": ["","","rompio","","",""]
+        "distance": 120.0,
+        "message": ["","","por","","naves",""]
     }
 }
 
 OUTPUT devuelve el siguiente formato:
 
-{"position":{"x":-100,"y":75.5},"message":" Ayuda se rompio el reactor principal"}
+{"position":{"x":6.809906127288924,"y":107.01682305063795},"message":" Fuimos atacados por dos naves desconocidas"}
 
 EJEMPLO 2:
 
-http://35.193.197.34/testMatias/OperacionFuego/topsecret_split/?Kenobi={
+http://34.136.51.66/OperacionFuego/topsecret_split/?Kenobi={
     "Kenobi": {
-        "distance": 110.0,
-        "message": ["Ayuda","","","","reactor",""]
-    }
-}&Sato={
-    "Skywalker": {
-        "distance": 135.5,
-        "message": ["","se","","el","","principal"]
+        "distance": 118.0,
+        "message": ["Fuimos","","","dos","",""]
     }
 }&Skywalker={
-    "Sato": {
-        "distance": 110.0,
-        "message": ["","","rompio","","",""]
+    "Skywalker": {
+        "distance": 149.5,
+        "message": ["","atacados","","","","desconocidas"]
     }
 }
 
 OUTPUT devuelve el siguiente formato:
 
-Algunos satelites no estan en linea, disponibles: Kenobi - - Sato
+Sato no esta en linea

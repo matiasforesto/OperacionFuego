@@ -261,7 +261,7 @@ function trilateracion(array $positions)
       $Sato_lat=$positions[2][2];//latitud
       $Sato_distancia=$positions[2][3];//distancia
 
-      //voy a pasar un promedio de las distancias de los 3 satelites a la nave
+      //voy a pasar un promedio de las distancias de los 3 satelites a la nave como suponiendo que los 3 satelites estan a la misma altura en el espacio con respecto a la nave
       $earthR= (($kenobi_distancia+$Skywalker_distancia+$Sato_distancia)/3);
 
       $LatA = $kenobi_lat;
