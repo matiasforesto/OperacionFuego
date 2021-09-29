@@ -63,7 +63,7 @@ function topSecret($satellites){
 
   if($Kenobi=="" || $Skywalker=="" || $Sato=="")
   {
-    print("Algunos satelites no estan en linea, disponibles: {$Kenobi} - {$Skywalker} - {$Sato}");
+    print("Algunos satelites no estan en linea, disponibles: {$Kenobi} | {$Skywalker} | {$Sato}");
     header("HTTP/1.1 404 Bad Request");
     exit();
   }
@@ -172,8 +172,6 @@ function topSecretSplit($satellites)
   }
 
   //GetLocation pasar las disntancias de los 3 satelites hasta la nave portacarga 
-  //INPUT GetLocation(dKe, dSk, dSa) 
-  //OUTPUT [-500, -200] location satelite
   $position = GetLocation($dKe, $dSk, $dSa);
   //GetMessage pasar el array de mensajes captados por los 3 satelites
   $message = GetMessage($messages);
@@ -245,23 +243,38 @@ function GetMessage(array $msgs){
   }
 }
 
-function trilateracion(array $datos_satelites)
+function trilateracion(array $positions)
 {
   ini_set('display_errors','1');
     //assuming elevation = 0
-      $earthR = 6371; // in km ( = 3959 in miles)
+    //$earthR = 6371; // in km ( = 3959 in miles) en mi caso cual es la distancia a pasar?
+     
+      $kenobi_lng=$positions[0][1];//longitud
+      $kenobi_lat=$positions[0][2];//latitud
+      $kenobi_distancia=$positions[0][3]; //distancia
 
-      $LatA = 37.418436;
-      $LonA = -121.963477;
-      $DistA = 0.265710701754;
+      $Skywalker_lng=$positions[1][1];//longitud
+      $Skywalker_lat=$positions[1][2];//latitud
+      $Skywalker_distancia=$positions[1][3];//distancia
 
-      $LatB = 37.417243;
-      $LonB = -121.961889;
-      $DistB = 0.234592423446;
+      $Sato_lng=$positions[2][1];//longitud
+      $Sato_lat=$positions[2][2];//latitud
+      $Sato_distancia=$positions[2][3];//distancia
 
-      $LatC = 37.418692;
-      $LonC = -121.960194;
-      $DistC = 0.0548954278262;
+      //voy a pasar un promedio de las distancias de los 3 satelites a la nave
+      $earthR= (($kenobi_distancia+$Skywalker_distancia+$Sato_distancia)/3);
+
+      $LatA = $kenobi_lat;
+      $LonA = $kenobi_lng;
+      $DistA = $kenobi_distancia;
+
+      $LatB = $Skywalker_lat;
+      $LonB = $Skywalker_lng;
+      $DistB = $Skywalker_distancia;
+
+      $LatC = $Sato_lat;
+      $LonC = $Sato_lng;
+      $DistC = $Sato_distancia;
 
       /*
       #using authalic sphere
@@ -287,9 +300,6 @@ function trilateracion(array $datos_satelites)
       sudo pear install Math_Vector-0.7.0
       sudo pear install Math_Matrix-0.8.7
       */
-      // Include PEAR::Math_Matrix
-      //  /usr/share/php/Math/Matrix.php
-      //  include_path=".:/usr/local/php/pear/"
       require_once 'Math/Matrix.php';
       require_once 'Math/Vector.php';
       require_once 'Math/Vector3.php';
@@ -377,7 +387,6 @@ function trilateracion(array $datos_satelites)
       $triPt_x = floatval( $triPt->_tuple->getData()[0] ) ;
       $triPt_y = floatval( $triPt->_tuple->getData()[1] ) ;
       $triPt_z = floatval( $triPt->_tuple->getData()[2] ) ;
-
 
       #convert back to lat/long from ECEF
       #convert to degrees
