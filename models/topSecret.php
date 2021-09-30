@@ -1,7 +1,7 @@
 <?php
 class topSecret{
 
-    function topSecretIn($satellites){
+    function buscarNave($satellites){
         
         require_once "../utils/utils.php";
         //validamos que este bien armado el JSON
@@ -25,9 +25,9 @@ class topSecret{
                 //Controlamos que la distancia sea un numero
                 if(!is_numeric($s->distance))
                 {
-                print($s->name." No trae una distancia numerica: ". $s->distance);
-                header("HTTP/1.1 404 Bad Request");
-                exit();
+                    print($s->name." No trae una distancia numerica: ". $s->distance);
+                    header("HTTP/1.1 404 Bad Request");
+                    exit();
                 }
 
                 switch ($s->name) {

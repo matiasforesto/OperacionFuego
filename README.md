@@ -166,3 +166,23 @@ http://34.136.51.66/OperacionFuego/topsecret_split/?Kenobi={
 OUTPUT devuelve el siguiente formato:
 
 Sato no esta en linea
+
+
+JSON CON RAW
+
+{
+    "Kenobi": {
+        "distance": 118.0,
+        "message": ["Fuimos","","","dos","",""]
+    },
+    "Skywalker": {
+        "distance": 149.5,
+        "message": ["","atacados","","","","desconocidas"]
+    },
+    "Sato": {
+        "distance": 120.0,
+        "message": ["","","por","","naves",""]
+    }
+}
+
+    

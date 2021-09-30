@@ -4,42 +4,36 @@
 ini_set('display_errors','1');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET'){ //ESPERA POST o GET
+ 
+    require_once "../controllers/topSecretSplit.php";
+    if(!empty($_REQUEST))
+    {
+        $satellites=$_REQUEST;
+        
+        $topSecretSplitController = new topSecretSplitController();
+        $position = $topSecretSplitController->topSecretSplitParameters($satellites);
+         
+        //respuesta
+        header("HTTP/1.1 200 OK");
+        print_r(json_encode($position));
+        exit();
 
-    require_once "../models/topSecretSplit.php";
-    
-    $satellites=array();
+    }elseif(file_get_contents("php://input")){
+        
+        $satellites = file_get_contents("php://input");// viene raw
+        
+        $topSecretSplitController = new topSecretSplitController();
+        $position = $topSecretSplitController->topSecretSplitRaw($satellites);
+         
+        //respuesta
+        header("HTTP/1.1 200 OK");
+        print_r(json_encode($position));
+        exit();
 
-    if(isset($_REQUEST['Kenobi'])){
-        $Kenobi=$_REQUEST['Kenobi'];
-        $satellites['Kenobi']=$Kenobi;
     }
-    else{
-            $satellites['Kenobi']="";
-        }
 
-    if(isset($_REQUEST['Skywalker'])){
-        $Skywalker=$_REQUEST['Skywalker'];
-        $satellites['Skywalker']=$Skywalker;
-    }else{
-            $satellites['Skywalker']="";
-    }
-
-    if(isset($_REQUEST['Sato'])){
-        $Sato=$_REQUEST['Sato'];
-        $satellites['Sato']=$Sato;
-    }else{
-            $satellites['Sato']="";
-    }
-
-    //ejecutamos topSecret para recuperar la posicion y el mensaje
-    $topSecretSplit = new topSecretSplit();
-    $position = $topSecretSplit->topSecretSplitIn($satellites);
-    
-    //respuesta
-    header("HTTP/1.1 200 OK");
-    print_r(json_encode($position));
-    exit();
 }
+
 
 //En caso de que ninguna de las opciones anteriores se haya ejecutado
 echo "los metodos request disponibles son: GET y POST";

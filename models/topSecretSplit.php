@@ -1,7 +1,13 @@
 <?php
 class topSecretSplit{
 
-    function topSecretSplitIn($satellites){
+    function buscarNaveRaw($satellites)
+    {
+        return $satellites;
+    }
+
+    function buscarNaveParameters($satellites){
+
         require_once "../utils/utils.php";
         
         $nameKe="";
@@ -12,7 +18,7 @@ class topSecretSplit{
         $dSa=null;
         $messages=array();
         
-        if($satellites["Kenobi"] == "")
+        if(!isset($satellites["Kenobi"]))
             {
                 print("Kenobi no esta en linea");
                 header("HTTP/1.1 404 Bad Request");
@@ -23,6 +29,9 @@ class topSecretSplit{
                 $Kenobi = json_validate($satellites["Kenobi"]);
                 if ( !is_object($Kenobi) ) {
                     $Kenobi = array('error'=>$Kenobi); 
+                    print("Kenobi no esta en linea");
+                    header("HTTP/1.1 404 Bad Request");
+                exit();
                 }
                 
                 foreach($Kenobi as $c=>$v) {
@@ -101,8 +110,7 @@ class topSecretSplit{
         //armamos el array final de salida pasando el mensaje
         $position["message"]=$message;
         
-        return $position;
-        
+        return $position;   
     }
 
 }
