@@ -30,6 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
         print_r(json_encode($position));
         exit();
 
+    }else{
+        echo 'topsecret_split espera los parametros "Kenobi", "Skywalker" y "Sato" en POST O GET, o puedes pasar un raw de JSON';
+        header("HTTP/1.1 400 Bad Request");
+        exit();
     }
 
 }

@@ -20,7 +20,7 @@ function GetLocation(float $dKe, float $dSk, float $dSa){
   }catch (Exception $e) {
         //print_r($e);
       echo "No se pueda determinar la posición";
-      header("HTTP/1.1 400 Bad Request");
+      header("HTTP/1.1 404 Bad Request");
       exit();
   }
 }
@@ -33,8 +33,7 @@ function GetMessage(array $msgs){
       
       //rearmamos el mensaje
       foreach($msgs as $msg) { 
-        foreach($msg as $clave => $valor) { 
-          //print_r($p);
+        foreach($msg as $clave => $valor) {     
           if($valor!="")
           {
             $msgFull[$clave]=$valor;
@@ -53,9 +52,8 @@ function GetMessage(array $msgs){
       return $message;
 
     }catch (Exception $e) {
-        //print_r($e);
         echo "No se pueda determinar el mensaje";
-        header("HTTP/1.1 400 Bad Request");
+        header("HTTP/1.1 404 Bad Request");
         exit();
   }
 }
@@ -77,7 +75,7 @@ function trilateracion(array $positions)
       $Sato_lng=$positions[2][1];//longitud
       $Sato_lat=$positions[2][2];//latitud
       $Sato_distancia=$positions[2][3];//distancia
-
+      
       //voy a pasar un promedio de las distancias de los 3 satelites a la nave como suponiendo que los 3 satelites estan a la misma altura en el espacio con respecto a la nave
       $earthR= (($kenobi_distancia+$Skywalker_distancia+$Sato_distancia)/3);
 
@@ -210,7 +208,7 @@ function trilateracion(array $positions)
       $lat = rad2deg(asin($triPt_z / $earthR));
       $lon = rad2deg(atan2($triPt_y,$triPt_x));
 
-      $position=array("position"=>array("x"=>$lat, "y"=>$lon));
+      $position=array("position"=>array("x"=>$lon, "y"=>$lat));
 
       return $position;
 }
@@ -259,7 +257,9 @@ function json_validate(string $string){
 
   if ($error !== '') {
     // throw the Exception or exit // or whatever :)
-    exit($error);
+      echo $error;
+      header("HTTP/1.1 404 Bad Request");
+      exit();
   }
 
   // everything is OK

@@ -7,7 +7,7 @@ http://34.136.51.66/OperacionFuego/topsecret/
 
 El método de ejecución es POST.
 
-Para ejecutar topsecret espera el parametro "satellites" Con el siguiente JSON INPUT:
+Para ejecutar topsecret espera el parametro "satellites" o puedes pasar un raw de JSON con el siguiente formato:
 
 EJEMPLO 1:
 
@@ -31,10 +31,9 @@ EJEMPLO 1:
     ]
 }
 
+OUTPUT devuelve el siguiente JSON:
 
-OUTPUT devuelve el siguiente formato:
-
-{"position":{"x":-8.024676043673253,"y":69.50272447014213},"message":" este es un mensaje secreto"}
+{"position":{"x":69.50272447014213,"y":-8.024676043673253},"message":" este es un mensaje secreto"}
 
 EJEMPLO 2:
 
@@ -58,9 +57,9 @@ EJEMPLO 2:
     ]
 }
 
-OUTPUT devuelve el siguiente formato:
+OUTPUT devuelve el siguiente JSON:
 
-{"position":{"x":-8.12176599007428,"y":70.69320124857136},"message":" Ayuda se rompio el reactor principal"}
+{"position":{"x":70.69320124857136,"y":-8.12176599007428},"message":" Ayuda se rompio el reactor principal"}
 
 EJEMPLO 3: 
 
@@ -86,13 +85,13 @@ Algunos satelites no estan en linea, disponibles: Kenobi | | Sato
 # Servicio 2
 http://34.136.51.66/OperacionFuego/topsecret_split/
 
-El método de ejecución es POST O GET. pasando un json por cada satelite
+El método de ejecución es POST O GET pasando un JSON por cada satelite
 
 { "satellite_name": {"distance":"110.0", "message": {"0":"Ayuda", "1":"", "2":"", "3":"", "4":"reactor", "5":""}}}
 
-Para ejecutar topsecret espera los parametros "Kenobi", "Skywalker" y "Sato" con el siguiente JSON INPUT:
+Para ejecutar topsecret_split espera los parametros "Kenobi", "Skywalker" y "Sato" con el siguiente JSON INPUT para cada parametro:
 
-# Mediante POST
+# Mediante POST o GET con parametros
 
 EJEMPLO 1:
 
@@ -119,56 +118,12 @@ EJEMPLO 1:
 
 OUTPUT devuelve el siguiente formato:
 
-{"position":{"x":-2.1889474519972314,"y":81.69987302953473},"message":" Fuimos atacados por dos naves desconocidas"}
+{"position":{"x":81.69987302953473,"y":-2.1889474519972314},"message":" Fuimos atacados por dos naves desconocidas"}
 
 
-# Mediante GET
-
-http://34.136.51.66/OperacionFuego/topsecret_split/{satellite_name}
+# Mediante POST o GET con raw falta ver este
 
 EJEMPLO 1:
-
-http://34.136.51.66/OperacionFuego/topsecret_split/?Kenobi={
-    "Kenobi": {
-        "distance": 118.0,
-        "message": ["Fuimos","","","dos","",""]
-    }
-}&Skywalker={
-    "Skywalker": {
-        "distance": 149.5,
-        "message": ["","atacados","","","","desconocidas"]
-    }
-}&Sato={
-    "Sato": {
-        "distance": 120.0,
-        "message": ["","","por","","naves",""]
-    }
-}
-
-OUTPUT devuelve el siguiente formato:
-
-{"position":{"x":6.809906127288924,"y":107.01682305063795},"message":" Fuimos atacados por dos naves desconocidas"}
-
-EJEMPLO 2:
-
-http://34.136.51.66/OperacionFuego/topsecret_split/?Kenobi={
-    "Kenobi": {
-        "distance": 118.0,
-        "message": ["Fuimos","","","dos","",""]
-    }
-}&Skywalker={
-    "Skywalker": {
-        "distance": 149.5,
-        "message": ["","atacados","","","","desconocidas"]
-    }
-}
-
-OUTPUT devuelve el siguiente formato:
-
-Sato no esta en linea
-
-
-JSON CON RAW
 
 {
     "Kenobi": {
@@ -184,5 +139,9 @@ JSON CON RAW
         "message": ["","","por","","naves",""]
     }
 }
+
+OUTPUT devuelve el siguiente formato:
+
+{"position":{"x":6.809906127288924,"y":107.01682305063795},"message":" Fuimos atacados por dos naves desconocidas"}
 
     

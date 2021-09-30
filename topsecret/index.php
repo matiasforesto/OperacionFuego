@@ -1,18 +1,16 @@
 <?php
-      //http://34.136.51.66/OperacionFuego/topsecret/
-      //ini_set('display_errors','1');
-
+      
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   if (isset($_POST['satellites']) ){
-      $satellites = $_POST['satellites']; //viene por el POST de topsecret
+      $satellites = $_POST['satellites']; //viene como parametro POST
   }
   elseif(file_get_contents("php://input")){
       $satellites = file_get_contents("php://input");// viene raw
   }
   else{
-      echo "No viene en el POST el JSON de satellites";
-      header("HTTP/1.1 400 Bad Request");
+      header("HTTP/1.1 404 Bad Request");
+      echo 'topsecret espera el parametro "satellites" en POST, o puedes pasar un raw de JSON';
       exit();
   }
   
