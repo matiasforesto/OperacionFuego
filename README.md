@@ -121,7 +121,7 @@ OUTPUT devuelve el siguiente formato:
 {"position":{"x":81.69987302953473,"y":-2.1889474519972314},"message":" Fuimos atacados por dos naves desconocidas"}
 
 
-# Mediante POST o GET con raw falta ver este
+# Mediante POST o GET con raw JSON
 
 EJEMPLO 1:
 
@@ -142,6 +142,4 @@ EJEMPLO 1:
 
 OUTPUT devuelve el siguiente formato:
 
-{"position":{"x":6.809906127288924,"y":107.01682305063795},"message":" Fuimos atacados por dos naves desconocidas"}
-
-    
+{"position":{"x":107.01682305063795,"y":6.809906127288924},"message":" Fuimos atacados por dos naves desconocidas"}

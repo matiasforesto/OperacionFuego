@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   }
   else{
       header("HTTP/1.1 404 Bad Request");
-      echo 'topsecret espera el parametro "satellites" en POST, o puedes pasar un raw de JSON';
+      print('topsecret espera el parametro "satellites" en POST, o puedes pasar un raw de JSON');
       exit();
   }
   
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 //En caso de que ninguna de las opciones anteriores se haya ejecutado
-echo "Metodos request disponible : POST ";
+print("Metodos request disponible : POST ");
 header("HTTP/1.1 400 Bad Request");
 exit();
 ?>

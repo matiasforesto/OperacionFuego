@@ -1,15 +1,12 @@
 <?php
-//http://34.136.51.66/OperacionFuego/topsecret_split/
-
-ini_set('display_errors','1');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET'){ //ESPERA POST o GET
  
     require_once "../controllers/topSecretSplit.php";
-    if(!empty($_REQUEST))
-    {
-        $satellites=$_REQUEST;
+    if(!empty($_REQUEST)){
         
+        $satellites=$_REQUEST;
+       
         $topSecretSplitController = new topSecretSplitController();
         $position = $topSecretSplitController->topSecretSplitParameters($satellites);
          
@@ -31,16 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
         exit();
 
     }else{
-        echo 'topsecret_split espera los parametros "Kenobi", "Skywalker" y "Sato" en POST O GET, o puedes pasar un raw de JSON';
+        print('topsecret_split espera los parametros "Kenobi", "Skywalker" y "Sato" en POST O GET, o puedes pasar un raw de JSON');
         header("HTTP/1.1 400 Bad Request");
         exit();
     }
 
 }
 
-
 //En caso de que ninguna de las opciones anteriores se haya ejecutado
-echo "los metodos request disponibles son: GET y POST";
+print("los metodos request disponibles son: GET y POST");
 header("HTTP/1.1 400 Bad Request");
 exit();
 ?>
