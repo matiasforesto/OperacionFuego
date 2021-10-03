@@ -18,9 +18,8 @@ function GetLocation(float $dKe, float $dSk, float $dSa){
       return $position;
       
   }catch (Exception $e) {
-      print("No se pueda determinar la posición");
-      header("HTTP/1.1 404 Bad Request");
-      exit();
+    $mensajeError=array("error"=>"No se pueda determinar la posición");
+    return $mensajeError;
   }
 }
 
@@ -51,9 +50,8 @@ function GetMessage(array $msgs){
       return $message;
 
     }catch (Exception $e) {
-      print("No se pueda determinar el mensaje");
-        header("HTTP/1.1 404 Bad Request");
-        exit();
+      $mensajeError=array("error"=>"No se pueda determinar el mensaje");
+      return $mensajeError;
   }
 }
 
@@ -255,10 +253,8 @@ function json_validate(string $string){
   }
 
   if ($error !== '') {
-    // throw the Exception or exit // or whatever :)
-      print($error);
-      header("HTTP/1.1 404 Bad Request");
-      exit();
+      $mensajeError=array("error"=>$error);
+      return $mensajeError;
   }
 
   // everything is OK

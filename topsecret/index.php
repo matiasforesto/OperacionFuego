@@ -1,5 +1,8 @@
 <?php
-      
+header("Content-Type: application/json");
+
+$mensajeError=array("error"=>"");
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   if (isset($_POST['satellites']) ){
@@ -9,8 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       $satellites = file_get_contents("php://input");// viene raw
   }
   else{
+      $mensajeError["error"]="topsecret espera el parametro 'satellites' en POST, o puedes pasar un raw de JSON";
+      print_r(json_encode($mensajeError));
       header("HTTP/1.1 404 Bad Request");
-      print('topsecret espera el parametro "satellites" en POST, o puedes pasar un raw de JSON');
       exit();
   }
   
@@ -25,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 //En caso de que ninguna de las opciones anteriores se haya ejecutado
-print("Metodos request disponible : POST ");
-header("HTTP/1.1 400 Bad Request");
+$mensajeError["error"]="Metodos request disponible : POST ";
+print_r(json_encode($mensajeError));
+header("HTTP/1.1 404 Bad Request");
 exit();
 ?>

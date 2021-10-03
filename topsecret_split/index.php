@@ -1,4 +1,7 @@
 <?php
+header("Content-Type: application/json");
+
+$mensajeError=array("error"=>"");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET'){ //ESPERA POST o GET
  
@@ -28,15 +31,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'GET')
         exit();
 
     }else{
-        print('topsecret_split espera los parametros "Kenobi", "Skywalker" y "Sato" en POST O GET, o puedes pasar un raw de JSON');
-        header("HTTP/1.1 400 Bad Request");
+        $mensajeError["error"]="topsecret_split espera los parametros 'Kenobi', 'Skywalker' y 'Sato' en POST O GET, o puedes pasar un raw de JSON";
+        print_r(json_encode($mensajeError));
+        header("HTTP/1.1 404 Bad Request");
         exit();
     }
 
 }
 
 //En caso de que ninguna de las opciones anteriores se haya ejecutado
-print("los metodos request disponibles son: GET y POST");
-header("HTTP/1.1 400 Bad Request");
+$mensajeError["error"]="los metodos request disponibles son: GET y POST";
+print_r(json_encode($mensajeError));
+header("HTTP/1.1 404 Bad Request");
 exit();
 ?>

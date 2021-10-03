@@ -7,7 +7,7 @@ class topSecret{
         //validamos que este bien armado el JSON
         $satellites = json_validate($satellites);
         if ( !is_object($satellites) ) {
-            $satellites = array('error'=>$satellites); 
+            return $satellites;
         }
 
         $Kenobi="";
@@ -18,6 +18,7 @@ class topSecret{
         $dSa=0.0;
         
         $messages=array();
+        $mensajeError=array("error"=>"");
         
         foreach($satellites as $satellite) { 
             foreach($satellite as $s) {
@@ -25,9 +26,8 @@ class topSecret{
                 //Controlamos que la distancia sea un numero
                 if(!is_numeric($s->distance))
                 {
-                    print($s->name." No trae una distancia numerica: ". $s->distance);
-                    header("HTTP/1.1 404 Bad Request");
-                    exit();
+                    $mensajeError["error"]=$c." No trae una distancia numerica: ". $s->distance;
+                    return  $mensajeError;
                 }
 
                 switch ($s->name) {
@@ -53,9 +53,8 @@ class topSecret{
                 break;
                 
                 default:
-                    print($s->name." No es un satelite en linea");
-                    header("HTTP/1.1 404 Bad Request");
-                    exit();
+                    $mensajeError["error"]=$s->name." No es un satelite en linea";
+                    return  $mensajeError;
                 break;
                 }
             
@@ -65,9 +64,8 @@ class topSecret{
 
         if($Kenobi=="" || $Skywalker=="" || $Sato=="")
         {
-            print("Algunos satelites no estan en linea, disponibles: {$Kenobi} | {$Skywalker} | {$Sato}");
-            header("HTTP/1.1 404 Bad Request");
-            exit();
+            $mensajeError["error"]="Algunos satelites no estan en linea, disponibles: {$Kenobi} | {$Skywalker} | {$Sato}";
+            return  $mensajeError;
         }
 
         //GetLocation pasar las disntancias de los 3 satelites hasta la nave portacarga 

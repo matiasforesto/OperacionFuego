@@ -7,7 +7,7 @@ class topSecretSplit{
         
         $satellites = json_validate($satellites);
         if ( !is_object($satellites) ) {
-            $satellites = array('error'=>$satellites); 
+            return $satellites;
         }
 
         $Kenobi="";
@@ -18,6 +18,7 @@ class topSecretSplit{
         $dSa=0.0;
 
         $messages=array();
+        $mensajeError=array("error"=>"");
         
         $detectedkenobi=0;
         $detectedSkywalker=0;
@@ -29,9 +30,8 @@ class topSecretSplit{
                 //Controlamos que la distancia sea un numero
                 if(!is_numeric($s->distance))
                 {
-                    print($c." No trae una distancia numerica: ". $s->distance);
-                    header("HTTP/1.1 404 Bad Request");
-                    exit();
+                    $mensajeError["error"]=$c." No trae una distancia numerica: ". $s->distance;
+                    return  $mensajeError;
                 }
 
                 switch ($c) {
@@ -66,9 +66,8 @@ class topSecretSplit{
                     break;
                     
                     default:
-                        print($c." No es un satelite en linea");
-                        header("HTTP/1.1 404 Bad Request");
-                        exit();
+                        $mensajeError["error"]=$c." No es un satelite en linea";
+                        return  $mensajeError;
                     break;
                 }
             }
@@ -76,9 +75,8 @@ class topSecretSplit{
 
         if($Kenobi=="" || $Skywalker=="" || $Sato=="")
         {
-            print("Algunos satelites no estan en linea, disponibles: {$Kenobi} | {$Skywalker} | {$Sato}");
-            header("HTTP/1.1 404 Bad Request");
-            exit();
+            $mensajeError["error"]="Algunos satelites no estan en linea, disponibles: {$Kenobi} | {$Skywalker} | {$Sato}";
+            return  $mensajeError;
         }
 
         //GetLocation pasar las disntancias de los 3 satelites hasta la nave portacarga 
@@ -102,18 +100,18 @@ class topSecretSplit{
         $nameSa="";
         $dSa=null;
         $messages=array();
+        $mensajeError=array("error"=>"");
         
         if(!isset($satellites["Kenobi"]))
             {
-                print("Kenobi no esta en linea");
-                header("HTTP/1.1 404 Bad Request");
-                exit();
+                $mensajeError["error"]="Kenobi no esta en linea";
+                return  $mensajeError;
             }
             else{
                 //validamos que este bien armado el JSON Kenobi
                 $Kenobi = json_validate($satellites["Kenobi"]);
                 if ( !is_object($Kenobi) ) {
-                    $Kenobi = array('error'=>$Kenobi);
+                    return $Kenobi;
                 }
                 
                 foreach($Kenobi as $c=>$v) {
@@ -129,15 +127,14 @@ class topSecretSplit{
                 
         if(!isset($satellites["Skywalker"]))
         {
-            print("Skywalker no esta en linea");
-            header("HTTP/1.1 404 Bad Request");
-            exit();
+            $mensajeError["error"]="Skywalker no esta en linea";
+            return  $mensajeError;
         }
         else{
                 //validamos que este bien armado el JSON
                 $Skywalker = json_validate($satellites["Skywalker"]);
                 if ( !is_object($Skywalker) ) {
-                    $Skywalker = array('error'=>$Skywalker); 
+                    return $Skywalker; 
                 }
             
                 foreach($Skywalker as $c=>$v) {
@@ -153,15 +150,14 @@ class topSecretSplit{
         
         if(!isset($satellites["Sato"]))
         {
-            print("Sato no esta en linea");
-            header("HTTP/1.1 404 Bad Request");
-            exit();
+            $mensajeError["error"]="Sato no esta en linea";
+            return  $mensajeError;
         }
         else{
                 //validamos que este bien armado el JSON
             $Sato = json_validate($satellites["Sato"]); 
             if ( !is_object($Sato) ) {
-            $Sato = array('error'=>$Sato); 
+                return $Sato;
             }
             
             foreach($Sato as $c=>$v) {
@@ -176,9 +172,8 @@ class topSecretSplit{
 
         if(!is_numeric($dKe) || !is_numeric($dSk) || !is_numeric($dSa))
         {
-            print("Algunas de las distancias no estan bien cargada : {$nameKe}:{$dKe} - {$nameSk}:{$dSk} - {$nameSa}:{$dSa}");
-            header("HTTP/1.1 404 Bad Request");
-            exit();
+            $mensajeError["error"]="Algunas de las distancias no estan bien cargada : {$nameKe}:{$dKe} - {$nameSk}:{$dSk} - {$nameSa}:{$dSa}";
+            return  $mensajeError;
         }
 
         //GetLocation pasar las disntancias de los 3 satelites hasta la nave portacarga 
