@@ -102,12 +102,11 @@ class topSecretSplit{
         $messages=array();
         $mensajeError=array("error"=>"");
         
-        if(!isset($satellites["Kenobi"]))
-            {
+        if(!isset($satellites["Kenobi"])){
                 $mensajeError["error"]="Kenobi no esta en linea";
                 return  $mensajeError;
-            }
-            else{
+        }
+        else{
                 //validamos que este bien armado el JSON Kenobi
                 $Kenobi = json_validate($satellites["Kenobi"]);
                 if ( !is_object($Kenobi) ) {
@@ -122,11 +121,9 @@ class topSecretSplit{
                     $msgKe= $v->message;
                     array_push ( $messages , (array)$msgKe );
                 } 
-            }
+        }
         
-                
-        if(!isset($satellites["Skywalker"]))
-        {
+        if(!isset($satellites["Skywalker"])){
             $mensajeError["error"]="Skywalker no esta en linea";
             return  $mensajeError;
         }
@@ -148,8 +145,7 @@ class topSecretSplit{
         }
         
         
-        if(!isset($satellites["Sato"]))
-        {
+        if(!isset($satellites["Sato"])){
             $mensajeError["error"]="Sato no esta en linea";
             return  $mensajeError;
         }

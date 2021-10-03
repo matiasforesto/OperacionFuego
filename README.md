@@ -33,7 +33,13 @@ EJEMPLO 1:
 
 OUTPUT devuelve el siguiente JSON:
 
-{"position":{"x":69.50272447014213,"y":-8.024676043673253},"message":" este es un mensaje secreto"}
+{
+    "position": {
+        "x": 69.50272447014213,
+        "y": -8.024676043673253
+    },
+    "message": " este es un mensaje secreto"
+}
 
 EJEMPLO 2:
 
@@ -59,7 +65,13 @@ EJEMPLO 2:
 
 OUTPUT devuelve el siguiente JSON:
 
-{"position":{"x":70.69320124857136,"y":-8.12176599007428},"message":" Ayuda se rompio el reactor principal"}
+{
+    "position": {
+        "x": 70.69320124857136,
+        "y": -8.12176599007428
+    },
+    "message": " Ayuda se rompio el reactor principal"
+}
 
 EJEMPLO 3: 
 
@@ -79,7 +91,9 @@ EJEMPLO 3:
 }
 
 OUTPUT devuelve el siguiente mensaje:
-Algunos satelites no estan en linea, disponibles: Kenobi | | Sato
+{
+    "error": "Algunos satelites no estan en linea, disponibles: Kenobi |  | Sato"
+}
 
 
 # Servicio 2
@@ -118,7 +132,13 @@ EJEMPLO 1:
 
 OUTPUT devuelve el siguiente formato:
 
-{"position":{"x":81.69987302953473,"y":-2.1889474519972314},"message":" Fuimos atacados por dos naves desconocidas"}
+{
+    "position": {
+        "x": 81.69987302953473,
+        "y": -2.1889474519972314
+    },
+    "message": " Fuimos atacados por dos naves desconocidas"
+}
 
 
 # Mediante POST o GET con raw JSON
@@ -142,4 +162,10 @@ EJEMPLO 1:
 
 OUTPUT devuelve el siguiente formato:
 
-{"position":{"x":107.01682305063795,"y":6.809906127288924},"message":" Fuimos atacados por dos naves desconocidas"}
+{
+    "position": {
+        "x": 107.01682305063795,
+        "y": 6.809906127288924
+    },
+    "message": " Fuimos atacados por dos naves desconocidas"
+}

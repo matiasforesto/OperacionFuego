@@ -57,7 +57,7 @@ function GetMessage(array $msgs){
 
 function trilateracion(array $positions)
 {
-  ini_set('display_errors','1');
+    //ini_set('display_errors','1');
     //assuming elevation = 0
     //$earthR = 6371; // in km ( = 3959 in miles) en mi caso cual es la distancia a pasar?
      
